@@ -5,7 +5,7 @@ import { useEditorContext } from "../state";
 import InsertMenu from "../Toolbar/InsertMenu";
 import VisibilitySelector from "../Toolbar/VisibilitySelector";
 import type { EditorToolbarProps } from "../types";
-import FormatButtons from "../Toolbar/formatButtons";
+import FormatButtons from "../Toolbar/FormatButtons";
 
 export const EditorToolbar: FC<EditorToolbarProps> = ({ onSave, onCancel, memoName }) => {
   const { state, actions, dispatch } = useEditorContext();
