@@ -1,5 +1,5 @@
 import type { Element } from "hast";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useUpdateMemo } from "@/hooks/useMemoQueries";
 import { toggleTaskAtIndex } from "@/utils/markdown-manipulation";
@@ -15,6 +15,17 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({ checked, ...props })
   const { readonly } = useMemoViewDerived();
   const checkboxRef = useRef<HTMLButtonElement>(null);
   const { mutate: updateMemo } = useUpdateMemo();
+
+  useEffect(() => {
+    const listItem = checkboxRef.current?.closest("li.task-list-item");
+    if (!listItem) return;
+
+    if (checked) {
+      listItem.classList.add("task-completed");
+    } else {
+      listItem.classList.remove("task-completed");
+    }
+  }, [checked]);
 
   const handleChange = async (newChecked: boolean) => {
     // Don't update if readonly or no memo
